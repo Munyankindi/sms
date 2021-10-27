@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+        </style>
+        
+        <h1>{{total}} </h1>
+        
+        <table>
+        <thead>
+        <tr>
+        <th>item_name</th>
+        <th>Date_arrived</th>
+        <th>expiry_date </th>
+        <th>action</th>
+        <th>Item Status</th>
+        </tr>
+        <thead>
+        <tbody>
+        
+        {% for i in objectList %}
+        <tr>
+        <td>{{i.item_name}}</td>
+        <td>{{i.Date_arrived}}</td>
+        <td>{{i.expiry_date }}</td>
+        <td><a href="{%url 'delete-stock' i.id %}"class="btn">Delete</a></td>
+        <td><a href="{%url 'update-stock' i.id %}"class="btn">Update</a></td>
+        <tr>
+        {% endfor %}
+        
+        <tbody>
+        </table>
+    <br>
+    <br>
+    <br>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form}}
+            <button type="submit">Submit</button>
+    </form>
+    <br>
+    {% for i in objectList %}
+    <p>{{i.item_name}}{{i.Date_arrived}}</p>
+    {% endfor %}
+</body>
+</html>
